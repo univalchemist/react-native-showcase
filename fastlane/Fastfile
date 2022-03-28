@@ -1,0 +1,88 @@
+teamid = "67V52LVHUB"
+
+lane :setup_environment do |options|
+    if not ["dev", "staging"].include?("#{ENV["CONFIGURATION"]}")
+        puts "ERROR: Configuration ENV is not set properly - should be one of: dev, staging"
+        abort
+    end
+
+    puts "RUNNING WITH CONFIGURATION=#{ENV["CONFIGURATION"]}".yellow
+    setup_env
+
+    copy_icons
+
+    copy_assets
+
+    # setup plist
+    update_plist(
+        plist_path: "ios/ReactNativeShowcase/Info.plist",
+        block: proc do |plist|
+            plist[:CFBundleIdentifier] = ENV["APP_BUNDLE_ID"]
+            plist[:CFBundleDisplayName] = ENV["APP_NAME"]
+        end
+    )
+    
+    update_project_team(
+        path: "ios/ReactNativeShowcase.xcodeproj",
+        teamid: teamid
+    )
+end
+
+lane :install_dependencies do
+    sh('cd ..; yarn install')
+    cocoapods(
+        podfile: 'ios/Podfile'
+        )
+    sh('cd ..; yarn test')
+end
+
+lane :start do
+    sh('yarn ios')
+    sh('yarn android')
+end
+
+lane :start_android do
+    sh('yarn android')
+end
+
+# TODO: Rename icon sets to differentiate from default ones
+def copy_icons
+    icons = "./configuration/#{ENV["CONFIGURATION"]}/icons"
+
+    # Android
+    sh("cp -a #{icons}/android/. ../android/app/src/main/res/")
+    puts "Copied successfuly to android/app/src/main/res/"
+    
+    # iOS
+    sh("cp -a #{icons}/ios/. ../ios/ReactNativeShowcase/Images.xcassets/")
+    puts "Copied successfuly to ios/ReactNativeShowcase/Images.xcassets/"
+end
+
+def copy_assets
+    assets = "./configuration/#{ENV["CONFIGURATION"]}/assets/."
+
+    sh("cp -a #{assets} ../src/assets/")
+    puts "Copied successfuly to src/assets"
+end
+
+# TODO: Create mechanism to enable loading custom ENVs per used library (not all variables will exist/be needed)
+def setup_env
+    env_file = "../.env.test"
+    append_env_basic = "./configuration/#{ENV["CONFIGURATION"]}/basic"
+    
+    # ===== concate envs and copy to root project
+    sh("cp #{append_env_basic} ../.env.test")
+    
+    # ===== load the env_file into the environment 
+    Dotenv.overload env_file
+    
+    # ====== ensure all necessary environment vars are setup
+    ensure_env_vars(
+      env_vars: %w[
+        APP_BUNDLE_ID
+        APP_NAME
+        ANDROID_VERSION_NUMBER
+        IOS_VERSION_NUMBER
+      ],
+    )
+  end

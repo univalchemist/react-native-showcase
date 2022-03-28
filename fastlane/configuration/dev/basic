@@ -1,0 +1,5 @@
+APP_BUNDLE_ID=com.ahs.preview.showcase
+APP_NAME="React Native Showcase"
+
+ANDROID_VERSION_NUMBER=1
+IOS_VERSION_NUMBER=1
