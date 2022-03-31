@@ -13,6 +13,7 @@ import {
   CreatePasswordScreen,
   AccountScreen,
   ChangePasswordScreen,
+  PaymentMethodsScreen,
 } from "../screens";
 import SettingsNavigator from "./SettingsNavigator";
 import { productPhotosMachine } from "../machines/productPhotosMachine";
@@ -43,6 +44,7 @@ export type MainStackParamList = {
   Onboarding: undefined;
   Account: undefined;
   ChangePassword: undefined;
+  PaymentMethods: undefined;
 };
 
 const Stack = createStackNavigator<MainStackParamList>();
@@ -81,6 +83,7 @@ const MainNavigator = () => {
         <Stack.Screen name="UploadPictures" component={UploadPictures} />
         <Stack.Screen name="Account" component={AccountScreen} />
         <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
+        <Stack.Screen name="PaymentMethods" component={PaymentMethodsScreen} />
 
         <Stack.Screen name="Settings" component={SettingsNavigator} />
         <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
@@ -151,4 +154,8 @@ export type AccountProps = NativeStackScreenProps<
 export type ChangePasswordProps = NativeStackScreenProps<
   MainStackParamList,
   "ChangePassword"
+>;
+export type PaymentMethodsProps = NativeStackScreenProps<
+  MainStackParamList,
+  "PaymentMethods"
 >;

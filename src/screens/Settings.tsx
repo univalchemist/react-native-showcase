@@ -30,7 +30,7 @@ const SETTINGS: SettingI[] = [
   {
     label: "Payment Method",
     icon: <CardSvg />,
-    navigateTo: "",
+    navigateTo: "PaymentMethods",
   },
   {
     label: "Notifications",
