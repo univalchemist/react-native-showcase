@@ -34,7 +34,7 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
                 title="Current Password"
                 value={currentPassword}
                 onChangeValue={setCurrentPassword}
-                enableSecureMode={false}
+                enableSecureMode={true}
               />
             </Box>
             <Box>
@@ -42,7 +42,7 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
                 title="New Password"
                 value={newPassword}
                 onChangeValue={setNewPassword}
-                enableSecureMode={false}
+                enableSecureMode={true}
               />
             </Box>
             <Box>
@@ -50,7 +50,7 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
                 title="Confirm New Password"
                 value={confirmNewPassword}
                 onChangeValue={setConfirmNewPassword}
-                enableSecureMode={false}
+                enableSecureMode={true}
               />
             </Box>
           </Stack>
