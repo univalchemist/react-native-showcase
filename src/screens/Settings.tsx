@@ -8,6 +8,7 @@ import NotificationsSvg from "@assets/icons/notifications.svg";
 import QuestionSvg from "@assets/icons/question-in-circle.svg";
 import LogoutSvg from "@assets/icons/logout.svg";
 import ChevronRightSvg from "@assets/icons/chevron-right.svg";
+import { ScreenHeader } from "@components/ScreenHeader";
 
 interface SettingI {
   label: string;
@@ -24,7 +25,7 @@ const SETTINGS: SettingI[] = [
   {
     label: "Change Password",
     icon: <PadlockSvg />,
-    navigateTo: "",
+    navigateTo: "ChangePassword",
   },
   {
     label: "Payment Method",
@@ -53,9 +54,10 @@ export const Settings = ({ navigation }) => {
     <Columns height="fluid" paddingTop={12}>
       <Row height="content">
         <Stack>
-          <Box paddingBottom={4} paddingLeft={5} paddingTop={3}>
-            <Typography style={styles.title}>Settings</Typography>
-          </Box>
+          <Row height="content" paddingX={6}>
+            <ScreenHeader title="Settings" displayBackArrow />
+          </Row>
+
           {SETTINGS.map((setting) => (
             <TouchableOpacity
               onPress={() => {

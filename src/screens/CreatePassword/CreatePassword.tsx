@@ -38,7 +38,7 @@ const CreatePassword = ({ navigation }: CreatePasswordProps) => {
           <Button
             text="Continue"
             onPress={() => {
-              navigation.replace("Settings");
+              navigation.navigate("Settings");
             }}
             enableFullWidth
           />

@@ -12,3 +12,4 @@ export { CreatePasswordScreen } from "./CreatePassword";
 export { ForgotPasswordScreen } from "./ForgotPassword";
 export { Settings } from "./Settings";
 export { AccountScreen } from "./Account";
+export { ChangePasswordScreen } from "./ChangePassword";
