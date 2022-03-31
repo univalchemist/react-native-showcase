@@ -11,6 +11,7 @@ import {
   LogInScreen,
   SignUpScreen,
   CreatePasswordScreen,
+  AccountScreen,
 } from "../screens";
 import SettingsNavigator from "./SettingsNavigator";
 import { productPhotosMachine } from "../machines/productPhotosMachine";
@@ -39,6 +40,7 @@ export type MainStackParamList = {
   UploadPictures: { link: string; scenario: number; requestId: string };
   Settings: undefined;
   Onboarding: undefined;
+  Account: undefined;
 };
 
 const Stack = createStackNavigator<MainStackParamList>();
@@ -59,6 +61,7 @@ const MainNavigator = () => {
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="CreatePassword" component={CreatePasswordScreen} />
+
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPasswordNavigator}
@@ -74,6 +77,8 @@ const MainNavigator = () => {
         <Stack.Screen name="Finish" component={FinishScreen} />
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
         <Stack.Screen name="UploadPictures" component={UploadPictures} />
+        <Stack.Screen name="Account" component={AccountScreen} />
+
         <Stack.Screen name="Settings" component={SettingsNavigator} />
         <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
       </Stack.Navigator>
@@ -134,4 +139,9 @@ export type SignUpProps = NativeStackScreenProps<MainStackParamList, "SignUp">;
 export type CreatePasswordProps = NativeStackScreenProps<
   MainStackParamList,
   "CreatePassword"
+>;
+
+export type AccountProps = NativeStackScreenProps<
+  MainStackParamList,
+  "Account"
 >;

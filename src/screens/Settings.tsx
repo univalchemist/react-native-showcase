@@ -12,36 +12,43 @@ import ChevronRightSvg from "@assets/icons/chevron-right.svg";
 interface SettingI {
   label: string;
   icon: Element;
+  navigateTo: string;
 }
 
 const SETTINGS: SettingI[] = [
   {
     label: "Account",
     icon: <UserSvg />,
+    navigateTo: "Account",
   },
   {
     label: "Change Password",
     icon: <PadlockSvg />,
+    navigateTo: "",
   },
   {
     label: "Payment Method",
     icon: <CardSvg />,
+    navigateTo: "",
   },
   {
     label: "Notifications",
     icon: <NotificationsSvg />,
+    navigateTo: "",
   },
   {
     label: "Support",
     icon: <QuestionSvg />,
+    navigateTo: "",
   },
   {
     label: "Log Out",
     icon: <LogoutSvg />,
+    navigateTo: "",
   },
 ];
 
-export const Settings = () => {
+export const Settings = ({ navigation }) => {
   return (
     <Columns height="fluid" paddingTop={12}>
       <Row height="content">
@@ -50,7 +57,11 @@ export const Settings = () => {
             <Typography style={styles.title}>Settings</Typography>
           </Box>
           {SETTINGS.map((setting) => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(setting.navigateTo);
+              }}
+            >
               <Columns alignY="center" paddingX={6} style={styles.settingItem}>
                 <Column width="fluid" paddingY={5}>
                   <Columns alignX="left" alignY="center">
