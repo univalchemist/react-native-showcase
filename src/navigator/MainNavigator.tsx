@@ -14,6 +14,7 @@ import {
   AccountScreen,
   ChangePasswordScreen,
   PaymentMethodsScreen,
+  AddOrEditCardScreen,
 } from "../screens";
 import SettingsNavigator from "./SettingsNavigator";
 import { productPhotosMachine } from "../machines/productPhotosMachine";
@@ -45,6 +46,7 @@ export type MainStackParamList = {
   Account: undefined;
   ChangePassword: undefined;
   PaymentMethods: undefined;
+  AddOrEditCard: undefined;
 };
 
 const Stack = createStackNavigator<MainStackParamList>();
@@ -84,6 +86,7 @@ const MainNavigator = () => {
         <Stack.Screen name="Account" component={AccountScreen} />
         <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
         <Stack.Screen name="PaymentMethods" component={PaymentMethodsScreen} />
+        <Stack.Screen name="AddOrEditCard" component={AddOrEditCardScreen} />
 
         <Stack.Screen name="Settings" component={SettingsNavigator} />
         <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
@@ -158,4 +161,8 @@ export type ChangePasswordProps = NativeStackScreenProps<
 export type PaymentMethodsProps = NativeStackScreenProps<
   MainStackParamList,
   "PaymentMethods"
+>;
+export type AddOrEditCardProps = NativeStackScreenProps<
+  MainStackParamList,
+  "AddOrEditCard"
 >;

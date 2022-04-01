@@ -60,7 +60,9 @@ const PaymentMethods = ({ navigation }: PaymentMethodsProps) => {
                     cardType={item?.cardType}
                     logo={item?.logo}
                     handleEditCard={() => {
-                      console.log("go to add card edit screen");
+                      navigation.navigate("AddOrEditCard", {
+                        screen: "editCard",
+                      });
                     }}
                   />
                 </Box>
@@ -68,7 +70,13 @@ const PaymentMethods = ({ navigation }: PaymentMethodsProps) => {
               renderSectionHeader={({ section: { paymentTitle } }) => (
                 <View style={styles.header}>
                   <Text style={styles.title}>{paymentTitle}</Text>
-                  <TouchableOpacity onPress={() => {}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("AddOrEditCard", {
+                        screen: "addCard",
+                      });
+                    }}
+                  >
                     <Text style={styles.add}>{`+ Add`}</Text>
                   </TouchableOpacity>
                 </View>
