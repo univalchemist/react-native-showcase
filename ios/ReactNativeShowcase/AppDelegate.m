@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 
+@import CardScan;
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -53,6 +55,8 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
+    [ScanViewController configureWithApiKey:@"<your_api_key_here>"];
+
   return YES;
 }
 

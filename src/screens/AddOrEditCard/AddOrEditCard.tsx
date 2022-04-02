@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Alert, View } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
-import InputField from "@components/InputField";
 import { AddOrEditCardProps } from "src/navigator/MainNavigator";
 import { Header } from "@components/Header";
-import BankCard from "@components/BankCard/BankCard";
 import DeleteIcon from "@assets/icons/deleteIcon.svg";
 import ToggleSwitch from "@components/ToggleSwitch/index";
+import BankCard from "@components/BankCard/";
 
 const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
   const [cardNumber, setCardNumber] = useState("");
@@ -70,7 +69,20 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
           </Row>
 
           <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
-            <Button text="Scan Card" onPress={() => {}} enableFullWidth />
+            <Button
+              text={
+                route?.params?.screen === "addCard"
+                  ? "Scan Card"
+                  : "Save Changes"
+              }
+              onPress={() => {
+                if (route?.params?.screen === "addCard") {
+                  navigation.navigate("CardScanner");
+                  return;
+                }
+              }}
+              enableFullWidth
+            />
           </Row>
         </Row>
       </Rows>

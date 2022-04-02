@@ -15,3 +15,4 @@ export { AccountScreen } from "./Account";
 export { ChangePasswordScreen } from "./ChangePassword";
 export { PaymentMethodsScreen } from "./PaymentMethods";
 export { AddOrEditCardScreen } from "./AddOrEditCard";
+export { CardScannerScreen } from "./CardScanner";

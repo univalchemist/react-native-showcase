@@ -2,14 +2,14 @@ import { StyleSheet, Text } from "react-native";
 import { Columns, Box, Bleed, Column } from "@mobily/stacks";
 import { ArrowLeft } from "@assets/images";
 import { useNavigation } from "@react-navigation/native";
-import { HeaderProps } from "./types";
+import { CSHeaderProps } from "./types";
 
-export const Header = ({
+export const CSHeader = ({
   title,
   copy,
   displayBackArrow = false,
   RightElement,
-}: HeaderProps) => {
+}: CSHeaderProps) => {
   const navigation = useNavigation();
   return (
     <>
