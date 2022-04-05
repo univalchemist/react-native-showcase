@@ -13,11 +13,7 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
 
   const validatePasswords = () => {
     if (currentPassword && newPassword && confirmNewPassword) {
-      if (newPassword === confirmNewPassword) {
-        return false;
-      } else {
-        return true;
-      }
+      return false;
     } else {
       return true;
     }

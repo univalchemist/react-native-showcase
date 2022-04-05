@@ -12,7 +12,7 @@ const PaymentCardItem: React.FC<PaymentCardItemProps> = ({
   handleEditCard,
 }) => {
   return (
-    <View>
+    <TouchableOpacity onPress={handleEditCard}>
       <View style={styles.itemContainer}>
         {logo}
         <View style={styles.cardDetail}>
@@ -22,11 +22,9 @@ const PaymentCardItem: React.FC<PaymentCardItemProps> = ({
             {expiryDate && ` . Expires: ${expiryDate}`}
           </Text>
         </View>
-        <TouchableOpacity onPress={handleEditCard}>
-          <ArrowRight />
-        </TouchableOpacity>
+        <ArrowRight />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
