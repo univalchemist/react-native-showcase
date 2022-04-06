@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 
-import IncorrectFieldIcon from "../../assets/images/check_invalid_circle.svg";
-import CorrectFieldIcon from "../../assets/images/check_valid_circle.svg";
-import EyeOffIcon from "../../assets/images/eye_off.svg";
-import EyeOnnIcon from "../../assets/images/eye_on.svg";
+import IncorrectFieldIcon from "@assets/images/check_invalid_circle.svg";
+import CorrectFieldIcon from "@assets/images/check_valid_circle.svg";
+import EyeOffIcon from "@assets/images/eye_off.svg";
+import EyeOnnIcon from "@assets/images/eye_on.svg";
 import { IInputField } from "./types";
 
 const Container = styled(View)`

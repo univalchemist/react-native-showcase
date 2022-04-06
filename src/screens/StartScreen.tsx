@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useActor } from "@xstate/react";
 import { SafeAreaView, StyleSheet } from "react-native";
+import { Button } from "@utils/Button";
 import { Typography } from "@components/Typography";
-import { ProductPhotosMachineContext } from "../navigator/MainNavigator";
-import { Button } from "../utils/Button";
+import { useProductFilesContext } from "@context/ProductFileMachineContext";
 
 export const StartScreen = () => {
-  const { photosService } = useContext(ProductPhotosMachineContext);
-  const [state, send] = useActor(photosService);
+  const { filesService } = useProductFilesContext();
+  const [state, send] = useActor(filesService);
 
   const onPressStart = () => send("NEXT");
 

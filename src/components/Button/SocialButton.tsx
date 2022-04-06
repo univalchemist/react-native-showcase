@@ -1,12 +1,12 @@
 import React from "react";
 import { SvgProps } from "react-native-svg";
 
-import FacebookIcon from "../../assets/images/facebook.svg";
+import FacebookIcon from "@assets/images/facebook.svg";
 import {
   SUPPORTED_BUTTON_SIZES,
   SUPPORTED_SOCIAL_TYPES,
   SUPPORTED_BUTTON_COLOR_SCHEMES,
-} from "../../utils/constants";
+} from "@utils/constants";
 import Button from "./Button";
 import { ISocialButtonProps } from "./types";
 

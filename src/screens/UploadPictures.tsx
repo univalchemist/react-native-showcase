@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { Typography } from "@components/Typography";
 import { UploadPicturesProps } from "src/navigator/MainNavigator";
-import { Button } from "../utils/Button";
+import { Button } from "@utils/Button";
 
 export const UploadPictures: React.FC<UploadPicturesProps> = ({
   route,

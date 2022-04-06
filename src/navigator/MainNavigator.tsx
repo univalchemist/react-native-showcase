@@ -1,7 +1,7 @@
-import { createContext } from "react";
+import { useAuth } from "@ftdr/react-native-auth";
 import {
   StartScreen,
-  TakePictureScreen,
+  TakePictureOrVideoScreen,
   ConfirmPictureScreen,
   FinishScreen,
   AuthScreen,
@@ -11,6 +11,7 @@ import {
   LogInScreen,
   SignUpScreen,
   CreatePasswordScreen,
+
   AccountScreen,
   ChangePasswordScreen,
   PaymentMethodsScreen,
@@ -19,15 +20,20 @@ import {
 } from "../screens";
 import SettingsNavigator from "./SettingsNavigator";
 import { productPhotosMachine } from "../machines/productPhotosMachine";
+
+} from "@screens/index";
+import { productFilesMachine } from "../machines/productFilesMachine";
+
 import { useInterpret } from "@xstate/react";
 import {
   createStackNavigator,
   StackNavigationProp,
 } from "@react-navigation/stack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { InterpreterFrom } from "xstate";
+import { ProductFilesContextProvider } from "@context/ProductFileMachineContext";
 import { ForgotPasswordNavigator } from "@screens/ForgotPassword";
 import OnboardingNavigator from "./OnboardingNavigator";
+import TabNavigator from "./TabNavigator";
 
 export type MainStackParamList = {
   Welcome: undefined;
@@ -37,35 +43,38 @@ export type MainStackParamList = {
   LogIn: undefined;
   Auth: undefined;
   Start: undefined;
-  TakePictureScreen: undefined;
+  TakePictureOrVideoScreen: undefined;
   ConfirmPictureScreen: undefined;
   Finish: undefined;
   ConfirmEmail: { link: string; userId: string };
   UploadPictures: { link: string; scenario: number; requestId: string };
-  Settings: undefined;
   Onboarding: undefined;
+
   Account: undefined;
   ChangePassword: undefined;
   PaymentMethods: undefined;
   AddOrEditCard: undefined;
   CardScanner: undefined;
+
 };
 
 const Stack = createStackNavigator<MainStackParamList>();
-
-export const ProductPhotosMachineContext = createContext({
-  photosService: {} as InterpreterFrom<typeof productPhotosMachine>,
-});
-
 const MainNavigator = () => {
-  const photosService = useInterpret(productPhotosMachine);
+  const filesService = useInterpret(productFilesMachine);
+  const { isLoading, isLoggedIn } = useAuth();
+
+  console.log("isloggedin", isLoggedIn);
 
   return (
-    <ProductPhotosMachineContext.Provider value={{ photosService }}>
+    <ProductFilesContextProvider value={{ filesService }}>
       <Stack.Navigator
         initialRouteName="Welcome"
-        screenOptions={{ headerShown: false }}
+        screenOptions={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
       >
+
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="CreatePassword" component={CreatePasswordScreen} />
@@ -93,8 +102,43 @@ const MainNavigator = () => {
 
         <Stack.Screen name="Settings" component={SettingsNavigator} />
         <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
+
+        {isLoggedIn ? (
+          <>
+            <Stack.Screen name="Welcome" component={TabNavigator} />
+            <Stack.Screen name="Auth" component={AuthScreen} />
+            <Stack.Screen name="Start" component={StartScreen} />
+            <Stack.Screen
+              name="TakePictureOrVideoScreen"
+              component={TakePictureOrVideoScreen}
+            />
+            <Stack.Screen
+              name="ConfirmPictureScreen"
+              component={ConfirmPictureScreen}
+            />
+            <Stack.Screen name="Finish" component={FinishScreen} />
+            <Stack.Screen name="UploadPictures" component={UploadPictures} />
+            <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen
+              name="CreatePassword"
+              component={CreatePasswordScreen}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPasswordNavigator}
+            />
+            <Stack.Screen name="LogIn" component={LogInScreen} />
+            <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
+          </>
+        )}
+
       </Stack.Navigator>
-    </ProductPhotosMachineContext.Provider>
+    </ProductFilesContextProvider>
   );
 };
 
@@ -108,9 +152,9 @@ export type StartScreenNavigationProp = StackNavigationProp<
   MainStackParamList,
   "Start"
 >;
-export type TakePictureScreenNavigationProp = StackNavigationProp<
+export type TakePictureOrVideoScreenNavigationProp = StackNavigationProp<
   MainStackParamList,
-  "TakePictureScreen"
+  "TakePictureOrVideoScreen"
 >;
 export type ConfirmPictureScreenNavigationProp = StackNavigationProp<
   MainStackParamList,
@@ -153,6 +197,7 @@ export type CreatePasswordProps = NativeStackScreenProps<
   "CreatePassword"
 >;
 
+
 export type AccountProps = NativeStackScreenProps<
   MainStackParamList,
   "Account"
@@ -173,3 +218,4 @@ export type CardScannerProps = NativeStackScreenProps<
   MainStackParamList,
   "CardScanner"
 >;
+

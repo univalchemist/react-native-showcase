@@ -1,16 +1,18 @@
 import { useAuth } from "@ftdr/react-native-auth";
 import React from "react";
-import { ActivityIndicator, SafeAreaView, StyleSheet, useColorScheme, View } from "react-native";
-import { LoggedIn } from "../components/LoggedIn";
-import { LoggedOut } from "../components/LoggedOut";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from "react-native";
+import { LoggedIn } from "@components/LoggedIn";
+import { LoggedOut } from "@components/LoggedOut";
 
 export const AuthScreen = () => {
-  const { isLoading, isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
   const colorScheme = useColorScheme();
-  
-  if (isLoading) {
-    return <ActivityIndicator />;
-  }
 
   return (
     <View

@@ -1,13 +1,12 @@
 import { useForm, Controller } from "react-hook-form";
 import InputField from "@components/InputField";
-import { formatPhoneNumber } from "@utils/formatPhoneNumber";
 import SearchByTemplate from "../SearchByTemplate/SearchByTemplate";
 
 interface FormFields {
-  phoneNumber: string;
+  address: string;
 }
 
-const SearchByPhoneNumber = () => {
+const SearchByPropertyAddress = () => {
   const {
     control,
     handleSubmit,
@@ -16,23 +15,22 @@ const SearchByPhoneNumber = () => {
   } = useForm<FormFields>({
     mode: "onChange",
     defaultValues: {
-      phoneNumber: "",
+      address: "",
     },
   });
-
-  const isPhoneNumberValid = (phonenumber: string) =>
-    /^\d{3}-\d{3}-\d{4}$/.test(phonenumber);
 
   const fetchProperties = (data: FormFields) => {
     // TODO do something/pass to the template
   };
 
-  const isFieldValid = () => isPhoneNumberValid(getValues("phoneNumber"));
+  const isAddressValid = (address: string) => !!address.length;
+
+  const isFieldValid = () => isAddressValid(getValues().address);
 
   return (
     <SearchByTemplate
-      type="phone_number"
-      title="Search by phone number"
+      type="property_address"
+      title="Search by address"
       isFieldValid={isFieldValid()}
       handleSubmit={handleSubmit(fetchProperties)}
       input={
@@ -40,28 +38,20 @@ const SearchByPhoneNumber = () => {
           control={control}
           rules={{
             required: true,
-            validate: isPhoneNumberValid,
           }}
           render={({ field: { onChange, value } }) => (
             <InputField
-              title="Phone number"
+              title="Address"
               value={value}
-              onChangeValue={(text: string) =>
-                onChange(formatPhoneNumber(text))
-              }
-              keyboardType="phone-pad"
-              shouldDisplayCheck={!!value}
-              isFieldValid={!errors.phoneNumber}
-              otherTextInputProps={{
-                maxLength: 12,
-              }}
+              onChangeValue={onChange}
+              isFieldValid={!errors.address}
             />
           )}
-          name="phoneNumber"
+          name="address"
         />
       }
     />
   );
 };
 
-export default SearchByPhoneNumber;
+export default SearchByPropertyAddress;

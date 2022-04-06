@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useActor } from "@xstate/react";
 import {
   SafeAreaView,
@@ -8,43 +8,64 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Typography } from "@components/Typography";
-import {
-  FinishScreenNavigationProp,
-  ProductPhotosMachineContext,
-} from "../navigator/MainNavigator";
+import Video from "react-native-video";
+import { FinishScreenNavigationProp } from "@navigator/MainNavigator";
 import { styles as baseStyles } from "./StartScreen";
-import { Button } from "../utils/Button";
+import { Button } from "@utils/Button";
+import { Typography } from "@components/Typography";
+import { useProductFilesContext } from "@context/ProductFileMachineContext";
 
 const { height } = Dimensions.get("screen");
 
 export const FinishScreen = () => {
   const navigation = useNavigation<FinishScreenNavigationProp>();
 
-  const { photosService } = useContext(ProductPhotosMachineContext);
-  const [state, send] = useActor(photosService);
+  const { filesService } = useProductFilesContext();
+  const [state, send] = useActor(filesService);
 
   const onPressFinish = () => {
     send("RESET");
-    navigation.navigate("Auth");
+    navigation.navigate("Welcome");
   };
 
-  const images = [
-    state.context.FrontPhoto,
-    state.context.SidePhoto,
-    state.context.SerialNumberPhoto,
+  const files = [
+    { source: state.context.FrontFile, format: state.context.FrontFileFormat },
+    { source: state.context.SideFile, format: state.context.SideFileFormat },
+    {
+      source: state.context.SerialNumberFile,
+      format: state.context.SerialNumberFileFormat,
+    },
   ];
-
   return (
     <SafeAreaView style={styles.container}>
       <Typography style={styles.title}>{state.value}</Typography>
       <View style={styles.imagesContainer}>
-        {images.map(
-          (image, i) =>
-            !!image && (
-              <Image key={i} source={{ uri: image }} style={styles.image} />
-            )
-        )}
+        {files.map((file, i) => {
+          if (file.format === "PHOTO") {
+            return (
+              !!file.source && (
+                <Image
+                  key={i}
+                  source={{ uri: file.source }}
+                  style={styles.image}
+                />
+              )
+            );
+          }
+          if (file.format === "VIDEO") {
+            return (
+              !!file.source && (
+                <Video
+                  key={i}
+                  source={{ uri: file.source }}
+                  style={styles.image}
+                  repeat
+                />
+              )
+            );
+          }
+          return;
+        })}
       </View>
       <Typography style={styles.description}>
         {state.context.description}

@@ -1,28 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useActor } from "@xstate/react";
 import {
   SafeAreaView,
+  Text,
   StyleSheet,
   View,
   Image,
   Dimensions,
 } from "react-native";
-import { Typography } from "@components/Typography";
-import { ProductPhotosMachineContext } from "../navigator/MainNavigator";
-import { ContextI, PhotosVariants } from "src/machines/productPhotosMachine";
-import { Button } from "../utils/Button";
+import { ContextI, PhotosVariants } from "src/machines/productFilesMachine";
+import { Button } from "@utils/Button";
+import Video from "react-native-video";
+import { useProductFilesContext } from "@context/ProductFileMachineContext";
 
 const { height, width } = Dimensions.get("screen");
 
 export const ConfirmPictureScreen = () => {
-  const { photosService } = useContext(ProductPhotosMachineContext);
-  const [state, send] = useActor(photosService);
-  const [imageUri, setImageUri] = useState(
+  const { filesService } = useProductFilesContext();
+  const [state, send] = useActor(filesService);
+  const [uri, setUri] = useState(
     (state.context as ContextI)[state.value as PhotosVariants]
+  );
+  const [format, setFormat] = useState(
+    (state.context as ContextI)[`${state.value as PhotosVariants}Format`]
   );
 
   const onPressConfirm = () =>
-    imageUri &&
+    uri &&
     send({
       type: "CONFIRM",
     });
@@ -33,17 +37,26 @@ export const ConfirmPictureScreen = () => {
     });
 
   useEffect(() => {
-    if (state.context.currentConfirmPhoto) {
-      setImageUri(state.context[state.context.currentConfirmPhoto]);
+    if (state.context.currentConfirmFile) {
+      setUri(state.context[state.context.currentConfirmFile]);
+      setFormat(state.context[`${state.context.currentConfirmFile}Format`]);
     }
   }, [state.value]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Typography style={styles.title}>{state.value}</Typography>
+      <Text style={styles.title}>{state.value}</Text>
       <View style={styles.imageContainer}>
-        {!!imageUri && (
-          <Image style={styles.image} source={{ uri: imageUri }} />
+        {format === "PHOTO" && !!uri && (
+          <Image style={styles.image} source={{ uri }} />
+        )}
+        {format === "VIDEO" && !!uri && (
+          <Video
+            style={styles.image}
+            source={{ uri }}
+            repeat
+            resizeMode="cover"
+          />
         )}
       </View>
       <Button onPress={onPressRetake}>Retake</Button>
@@ -68,7 +81,5 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: height * 0.6,
     width: width - 16 * 2,
-    borderColor: "#000",
-    borderWidth: 1,
   },
 });

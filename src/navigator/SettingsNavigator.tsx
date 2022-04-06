@@ -1,4 +1,4 @@
-import { Settings } from "../screens";
+import { Settings } from "@screens/index";
 import { createStackNavigator } from "@react-navigation/stack";
 
 export type MainStackParamList = {

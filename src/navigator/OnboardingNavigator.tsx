@@ -2,8 +2,10 @@ import {
   ZipCodeScreen,
   SelectSearchOptionScreen,
   SearchByPhoneNumberScreen,
+  SearchByPropertyAddressScreen,
+  SearchByContractNumberScreen,
   AutoRenewalScreen,
-} from "../screens/Onboarding";
+} from "@screens/Onboarding";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -11,6 +13,8 @@ export type OnboardingStackParamList = {
   ZipCode: undefined;
   SelectSearchOption: undefined;
   SearchByPhoneNumber: undefined;
+  SearchByPropertyAddress: undefined;
+  SearchByContractNumber: undefined;
   AutoRenewal: undefined;
 };
 
@@ -31,6 +35,14 @@ const OnboardingNavigator = () => {
         name="SearchByPhoneNumber"
         component={SearchByPhoneNumberScreen}
       />
+      <Stack.Screen
+        name="SearchByPropertyAddress"
+        component={SearchByPropertyAddressScreen}
+      />
+      <Stack.Screen
+        name="SearchByContractNumber"
+        component={SearchByContractNumberScreen}
+      />
       <Stack.Screen name="AutoRenewal" component={AutoRenewalScreen} />
     </Stack.Navigator>
   );
@@ -50,6 +62,8 @@ export type SearchByPhoneNumberScreenNavigationProp = NativeStackScreenProps<
   OnboardingStackParamList,
   "SearchByPhoneNumber"
 >;
+export type SearchByPropertyAddressScreenNavigationProp =
+  NativeStackScreenProps<OnboardingStackParamList, "SearchByPropertyAddress">;
 export type AutoRenewalScreenNavigationProps = NativeStackScreenProps<
   OnboardingStackParamList,
   "AutoRenewal"

@@ -1,6 +1,6 @@
 export { AuthScreen } from "./AuthScreen";
 export { StartScreen } from "./StartScreen";
-export { TakePictureScreen } from "./TakePictureScreen";
+export { TakePictureOrVideoScreen } from "./TakePictureOrVideoScreen";
 export { ConfirmPictureScreen } from "./ConfirmPictureScreen";
 export { FinishScreen } from "./FinishScreen";
 export { ConfirmEmail } from "./ConfirmEmail";
@@ -11,8 +11,10 @@ export { SignUpScreen } from "./SignUpScreen";
 export { CreatePasswordScreen } from "./CreatePassword";
 export { ForgotPasswordScreen } from "./ForgotPassword";
 export { Settings } from "./Settings";
+
 export { AccountScreen } from "./Account";
 export { ChangePasswordScreen } from "./ChangePassword";
 export { PaymentMethodsScreen } from "./PaymentMethods";
 export { AddOrEditCardScreen } from "./AddOrEditCard";
 export { CardScannerScreen } from "./CardScanner";
+

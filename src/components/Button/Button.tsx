@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 import {
   SUPPORTED_BUTTON_SIZES,
   SUPPORTED_BUTTON_COLOR_SCHEMES,
-} from "../../utils/constants";
+} from "@utils/constants";
 import {
   IButtonSizeObject,
   IButtonSizesValues,

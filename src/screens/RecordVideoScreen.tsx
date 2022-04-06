@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,27 +12,48 @@ import { Hints } from "@utils/Hints";
 
 const { height } = Dimensions.get("screen");
 
-interface TakePictureScreenProps {
+interface RecordVideoScreenProps {
   closeCamera: () => void;
-  onPictureWasTaken: (imageUri: string) => void;
+  onVideoWasRecorded: (videoUri: string) => void;
   hints: string[];
 }
 
-export const TakePictureScreen: React.FC<TakePictureScreenProps> = ({
+const RecordVideoScreen: React.FC<RecordVideoScreenProps> = ({
   closeCamera,
-  onPictureWasTaken,
+  onVideoWasRecorded,
   hints,
 }) => {
+  const [videoSource, setVideoSource] = useState<string | null>(null);
+  const [isRecording, setIsRecording] = useState(false);
+
   const cameraRef = useRef<RNCamera | null>(null);
 
-  const takePicture = async () => {
+  const startRecordingVideo = async () => {
     if (cameraRef.current) {
-      const options = { quality: 0.7, base64: false };
-      const data = await cameraRef.current.takePictureAsync(options);
-      onPictureWasTaken(data.uri);
-      closeCamera();
+      try {
+        const videoRecordPromise = cameraRef.current.recordAsync();
+        setIsRecording(true);
+        if (videoRecordPromise) {
+          const data = await videoRecordPromise;
+          setVideoSource(data.uri);
+        }
+      } catch (error) {
+        console.warn(error);
+      }
     }
   };
+  const stopRecordingVideo = () => {
+    if (cameraRef.current) {
+      cameraRef.current.stopRecording();
+      setIsRecording(false);
+    }
+  };
+
+  useEffect(() => {
+    if (videoSource && !isRecording) {
+      onVideoWasRecorded(videoSource);
+    }
+  }, [videoSource, isRecording, onVideoWasRecorded]);
 
   return (
     <View style={styles.container}>
@@ -48,6 +69,7 @@ export const TakePictureScreen: React.FC<TakePictureScreenProps> = ({
           buttonNegative: "Cancel",
         }}
       />
+      {isRecording && <View style={styles.recordingDot} />}
       <View style={StyleSheet.absoluteFillObject}>
         <TouchableOpacity
           style={styles.closeButtonContainer}
@@ -59,7 +81,10 @@ export const TakePictureScreen: React.FC<TakePictureScreenProps> = ({
           <Hints hints={hints} />
         </View>
         <View style={styles.buttonContainer}>
-          <CameraButton onPress={takePicture} />
+          <CameraButton
+            onStart={startRecordingVideo}
+            onEnd={stopRecordingVideo}
+          />
         </View>
       </View>
     </View>
@@ -72,6 +97,15 @@ const styles = StyleSheet.create({
   },
   preview: {
     flex: 1,
+  },
+  recordingDot: {
+    position: "absolute",
+    right: 50,
+    top: 50,
+    width: 16,
+    height: 16,
+    backgroundColor: "#f00",
+    borderRadius: 16,
   },
   closeButtonContainer: {
     top: height / 16,
@@ -99,3 +133,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+export default RecordVideoScreen;

@@ -48,7 +48,11 @@ const ZipCode = ({ navigation }: ZipCodeScreenNavigationProp) => {
                   value={zipCode}
                   onChangeValue={setZipCode}
                   keyboardType="number-pad"
-                  shouldDisplayCheck={isFieldValid()}
+                  shouldDisplayCheck={!!zipCode}
+                  isFieldValid={isFieldValid()}
+                  otherTextInputProps={{
+                    maxLength: 5,
+                  }}
                 />
               </Box>
             </Stack>

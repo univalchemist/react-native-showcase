@@ -2,7 +2,7 @@ import { useAuth } from "@ftdr/react-native-auth";
 import React, { useState } from "react";
 import { StyleSheet, TextInput, useColorScheme } from "react-native";
 import { Typography } from "@components/Typography";
-import { Button } from "../utils/Button";
+import { Button } from "@utils/Button";
 
 export const LoggedOut = () => {
   const colorScheme = useColorScheme();
@@ -42,7 +42,12 @@ export const LoggedOut = () => {
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.nativeEvent.text)}
-        style={styles.input}
+        style={[
+          styles.input,
+          {
+            color: colorScheme === "dark" ? "#fff" : "#000",
+          },
+        ]}
         secureTextEntry
       />
 
