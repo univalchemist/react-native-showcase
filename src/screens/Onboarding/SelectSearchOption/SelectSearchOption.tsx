@@ -10,10 +10,10 @@ const SelectSearchOption = ({
     navigation.navigate("SearchByPhoneNumber");
   };
   const onPressSearchByPropertyAddress = () => {
-    // navigation.navigate("SearchByPropertyAddress");
+    navigation.navigate("SearchByPropertyAddress");
   };
   const onPressSearchByContractNumber = () => {
-    // navigation.navigate("SearchByContractNumber");
+    navigation.navigate("SearchByContractNumber");
   };
 
   return (

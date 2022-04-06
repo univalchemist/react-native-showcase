@@ -1,13 +1,12 @@
 import { useForm, Controller } from "react-hook-form";
 import InputField from "@components/InputField";
-import { formatPhoneNumber } from "@utils/formatPhoneNumber";
 import SearchByTemplate from "../SearchByTemplate/SearchByTemplate";
 
 interface FormFields {
-  phoneNumber: string;
+  contractNumber: string;
 }
 
-const SearchByPhoneNumber = () => {
+const SearchByPropertyAddress = () => {
   const {
     control,
     handleSubmit,
@@ -16,23 +15,23 @@ const SearchByPhoneNumber = () => {
   } = useForm<FormFields>({
     mode: "onChange",
     defaultValues: {
-      phoneNumber: "",
+      contractNumber: "",
     },
   });
-
-  const isPhoneNumberValid = (phonenumber: string) =>
-    /^\d{3}-\d{3}-\d{4}$/.test(phonenumber);
 
   const fetchProperties = (data: FormFields) => {
     // TODO do something/pass to the template
   };
 
-  const isFieldValid = () => isPhoneNumberValid(getValues("phoneNumber"));
+  const isContractNumberValid = (contractNumber: string) =>
+    !!contractNumber.length;
+
+  const isFieldValid = () => isContractNumberValid(getValues().contractNumber);
 
   return (
     <SearchByTemplate
-      type="phone_number"
-      title="Search by phone number"
+      type="contract_number"
+      title="Search by contract number"
       isFieldValid={isFieldValid()}
       handleSubmit={handleSubmit(fetchProperties)}
       input={
@@ -40,28 +39,20 @@ const SearchByPhoneNumber = () => {
           control={control}
           rules={{
             required: true,
-            validate: isPhoneNumberValid,
           }}
           render={({ field: { onChange, value } }) => (
             <InputField
-              title="Phone number"
+              title="Contract number"
               value={value}
-              onChangeValue={(text: string) =>
-                onChange(formatPhoneNumber(text))
-              }
-              keyboardType="phone-pad"
-              shouldDisplayCheck={!!value}
-              isFieldValid={!errors.phoneNumber}
-              otherTextInputProps={{
-                maxLength: 12,
-              }}
+              onChangeValue={onChange}
+              isFieldValid={!errors.contractNumber}
             />
           )}
-          name="phoneNumber"
+          name="contractNumber"
         />
       }
     />
   );
 };
 
-export default SearchByPhoneNumber;
+export default SearchByPropertyAddress;

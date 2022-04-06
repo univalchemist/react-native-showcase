@@ -9,10 +9,7 @@ import React from "react";
 import { Image, StyleSheet } from "react-native";
 import { WelcomeProps } from "src/navigator/MainNavigator";
 
-import {
-  Button,
-  SUPPORTED_BUTTON_COLOR_SCHEMES,
-} from "../../components/Button";
+import { Button, SUPPORTED_BUTTON_COLOR_SCHEMES } from "@components/Button";
 import { Carousel } from "./components/Carousel";
 
 const CarouselData = [

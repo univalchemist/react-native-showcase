@@ -6,7 +6,6 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Text, StyleSheet } from "react-native";
 import { SignUpProps } from "src/navigator/MainNavigator";
-
 import { isPhoneValid, isEmailValid } from "../../helpers/common";
 
 type ISignUpInputFields = {

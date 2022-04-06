@@ -8,62 +8,54 @@ import NotificationsSvg from "@assets/icons/notifications.svg";
 import QuestionSvg from "@assets/icons/question-in-circle.svg";
 import LogoutSvg from "@assets/icons/logout.svg";
 import ChevronRightSvg from "@assets/icons/chevron-right.svg";
-import { ScreenHeader } from "@components/ScreenHeader";
+import { useAuth } from "@ftdr/react-native-auth";
 
 interface SettingI {
   label: string;
   icon: Element;
-  navigateTo: string;
+  onPress?: () => void;
 }
 
-const SETTINGS: SettingI[] = [
-  {
-    label: "Account",
-    icon: <UserSvg />,
-    navigateTo: "Account",
-  },
-  {
-    label: "Change Password",
-    icon: <PadlockSvg />,
-    navigateTo: "ChangePassword",
-  },
-  {
-    label: "Payment Method",
-    icon: <CardSvg />,
-    navigateTo: "",
-  },
-  {
-    label: "Notifications",
-    icon: <NotificationsSvg />,
-    navigateTo: "",
-  },
-  {
-    label: "Support",
-    icon: <QuestionSvg />,
-    navigateTo: "",
-  },
-  {
-    label: "Log Out",
-    icon: <LogoutSvg />,
-    navigateTo: "",
-  },
-];
+export const Settings = () => {
+  const { logout } = useAuth();
 
-export const Settings = ({ navigation }) => {
+  const SETTINGS: SettingI[] = [
+    {
+      label: "Account",
+      icon: <UserSvg />,
+    },
+    {
+      label: "Change Password",
+      icon: <PadlockSvg />,
+    },
+    {
+      label: "Payment Method",
+      icon: <CardSvg />,
+    },
+    {
+      label: "Notifications",
+      icon: <NotificationsSvg />,
+    },
+    {
+      label: "Support",
+      icon: <QuestionSvg />,
+    },
+    {
+      label: "Log Out",
+      icon: <LogoutSvg />,
+      onPress: () => logout(),
+    },
+  ];
+
   return (
     <Columns height="fluid" paddingTop={12}>
       <Row height="content">
         <Stack>
-          <Row height="content" paddingX={6}>
-            <ScreenHeader title="Settings" displayBackArrow />
-          </Row>
-
+          <Box paddingBottom={4} paddingLeft={5} paddingTop={3}>
+            <Typography style={styles.title}>Settings</Typography>
+          </Box>
           {SETTINGS.map((setting) => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(setting.navigateTo);
-              }}
-            >
+            <TouchableOpacity onPress={setting?.onPress}>
               <Columns alignY="center" paddingX={6} style={styles.settingItem}>
                 <Column width="fluid" paddingY={5}>
                   <Columns alignX="left" alignY="center">

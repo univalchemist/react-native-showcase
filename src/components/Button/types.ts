@@ -5,7 +5,7 @@ import {
   SUPPORTED_BUTTON_SIZES,
   SUPPORTED_BUTTON_COLOR_SCHEMES,
   SUPPORTED_SOCIAL_TYPES,
-} from "../../utils/constants";
+} from "@utils/constants";
 
 export type IButtonSize = {
   [key in SUPPORTED_BUTTON_SIZES]: SUPPORTED_BUTTON_SIZES;

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Switch, useColorScheme, View } from "react-native";
 import { Typography } from "@components/Typography";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "../utils/Button";
-import { AuthScreenNavigationProp } from "../navigator/MainNavigator";
+import { Button } from "@utils/Button";
+import { AuthScreenNavigationProp } from "@navigator/MainNavigator";
 
 export const LoggedIn = () => {
   const colorScheme = useColorScheme();

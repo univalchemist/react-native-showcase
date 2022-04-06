@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, Pressable } from "react-native";
+import { useAuth } from "@ftdr/react-native-auth";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import InputField from "@components/InputField";
@@ -9,8 +10,12 @@ import { ScreenHeader } from "@components/ScreenHeader";
 const LogIn = ({ navigation }: LogInProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("saula.akinlol@frontdoorhome.com");
-  // const [password, setPassword] = useState("Learntocode1%");
+
+  const { login, loginError } = useAuth();
+
+  const onPressLogIn = () => {
+    login(email, password);
+  };
 
   return (
     <Columns height="fluid" paddingTop={12}>
@@ -60,13 +65,7 @@ const LogIn = ({ navigation }: LogInProps) => {
           </Stack>
         </Row>
         <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
-          <Button
-            text="Continue"
-            onPress={() => {
-              navigation.navigate("CreatePassword"); // send('SIGN_UP')
-            }}
-            enableFullWidth
-          />
+          <Button text="Continue" onPress={onPressLogIn} enableFullWidth />
         </Row>
       </Rows>
     </Columns>

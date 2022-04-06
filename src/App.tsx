@@ -5,10 +5,10 @@ import { useDynamicLinks } from "@ftdr/react-native-dynamic-links";
 // } from "@ftdr/react-native-notifications";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "@ftdr/react-native-auth";
+import { DefaultTheme } from "@react-navigation/native";
 import {
   createNavigationContainerRef,
   NavigationContainer,
-  DefaultTheme,
 } from "@react-navigation/native";
 // import {
 //   AUTH_CLIENT_ID,
@@ -48,8 +48,6 @@ const App = () => {
   // useNotifications({
   //   onMessage: (message) => console.log(message),
   // });
-
-  // handleDeepLink({url: 'https://ahs.com/?link=uploadPictures,scenario%3D1,requestId%3D313dmm4o3ja,test%3D123'});
 
   useDynamicLinks({
     onLink: (link) => handleDeepLink(link),
