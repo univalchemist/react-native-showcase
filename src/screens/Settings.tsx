@@ -13,8 +13,10 @@ import { useAuth } from "@ftdr/react-native-auth";
 interface SettingI {
   label: string;
   icon: Element;
+  navigateTo: string;
   onPress?: () => void;
 }
+
 
 
 const SETTINGS: SettingI[] = [
@@ -50,11 +52,14 @@ const SETTINGS: SettingI[] = [
   },
 ];
 
+
+
+
+
+
+
 export const Settings = () => {
   const { logout } = useAuth();
-
-
-
 
   return (
     <Columns height="fluid" paddingTop={12}>

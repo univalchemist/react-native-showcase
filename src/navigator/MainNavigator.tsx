@@ -12,6 +12,7 @@ import {
   SignUpScreen,
   CreatePasswordScreen,
 
+
   AccountScreen,
   ChangePasswordScreen,
   PaymentMethodsScreen,
@@ -21,7 +22,10 @@ import {
 import SettingsNavigator from "./SettingsNavigator";
 import { productPhotosMachine } from "../machines/productPhotosMachine";
 
-} from "@screens/index";
+import { productFilesMachine } from "../machines/productFilesMachine";
+
+
+
 import { productFilesMachine } from "../machines/productFilesMachine";
 
 import { useInterpret } from "@xstate/react";
@@ -50,11 +54,13 @@ export type MainStackParamList = {
   UploadPictures: { link: string; scenario: number; requestId: string };
   Onboarding: undefined;
 
+
   Account: undefined;
   ChangePassword: undefined;
   PaymentMethods: undefined;
   AddOrEditCard: undefined;
   CardScanner: undefined;
+
 
 };
 
@@ -74,6 +80,7 @@ const MainNavigator = () => {
           gestureEnabled: false,
         }}
       >
+
 
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -102,6 +109,7 @@ const MainNavigator = () => {
 
         <Stack.Screen name="Settings" component={SettingsNavigator} />
         <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
+
 
         {isLoggedIn ? (
           <>
@@ -198,6 +206,7 @@ export type CreatePasswordProps = NativeStackScreenProps<
 >;
 
 
+
 export type AccountProps = NativeStackScreenProps<
   MainStackParamList,
   "Account"
@@ -218,4 +227,5 @@ export type CardScannerProps = NativeStackScreenProps<
   MainStackParamList,
   "CardScanner"
 >;
+
 
