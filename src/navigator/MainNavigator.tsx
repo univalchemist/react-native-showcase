@@ -11,8 +11,19 @@ import {
   LogInScreen,
   SignUpScreen,
   CreatePasswordScreen,
+
+  AccountScreen,
+  ChangePasswordScreen,
+  PaymentMethodsScreen,
+  AddOrEditCardScreen,
+  CardScannerScreen,
+} from "../screens";
+import SettingsNavigator from "./SettingsNavigator";
+import { productPhotosMachine } from "../machines/productPhotosMachine";
+
 } from "@screens/index";
 import { productFilesMachine } from "../machines/productFilesMachine";
+
 import { useInterpret } from "@xstate/react";
 import {
   createStackNavigator,
@@ -38,6 +49,13 @@ export type MainStackParamList = {
   ConfirmEmail: { link: string; userId: string };
   UploadPictures: { link: string; scenario: number; requestId: string };
   Onboarding: undefined;
+
+  Account: undefined;
+  ChangePassword: undefined;
+  PaymentMethods: undefined;
+  AddOrEditCard: undefined;
+  CardScanner: undefined;
+
 };
 
 const Stack = createStackNavigator<MainStackParamList>();
@@ -56,6 +74,35 @@ const MainNavigator = () => {
           gestureEnabled: false,
         }}
       >
+
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="CreatePassword" component={CreatePasswordScreen} />
+
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordNavigator}
+        />
+        <Stack.Screen name="LogIn" component={LogInScreen} />
+        <Stack.Screen name="Auth" component={AuthScreen} />
+        <Stack.Screen name="Start" component={StartScreen} />
+        <Stack.Screen name="TakePictureScreen" component={TakePictureScreen} />
+        <Stack.Screen
+          name="ConfirmPictureScreen"
+          component={ConfirmPictureScreen}
+        />
+        <Stack.Screen name="Finish" component={FinishScreen} />
+        <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
+        <Stack.Screen name="UploadPictures" component={UploadPictures} />
+        <Stack.Screen name="Account" component={AccountScreen} />
+        <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
+        <Stack.Screen name="PaymentMethods" component={PaymentMethodsScreen} />
+        <Stack.Screen name="AddOrEditCard" component={AddOrEditCardScreen} />
+        <Stack.Screen name="CardScanner" component={CardScannerScreen} />
+
+        <Stack.Screen name="Settings" component={SettingsNavigator} />
+        <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
+
         {isLoggedIn ? (
           <>
             <Stack.Screen name="Welcome" component={TabNavigator} />
@@ -89,6 +136,7 @@ const MainNavigator = () => {
             <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
           </>
         )}
+
       </Stack.Navigator>
     </ProductFilesContextProvider>
   );
@@ -148,3 +196,26 @@ export type CreatePasswordProps = NativeStackScreenProps<
   MainStackParamList,
   "CreatePassword"
 >;
+
+
+export type AccountProps = NativeStackScreenProps<
+  MainStackParamList,
+  "Account"
+>;
+export type ChangePasswordProps = NativeStackScreenProps<
+  MainStackParamList,
+  "ChangePassword"
+>;
+export type PaymentMethodsProps = NativeStackScreenProps<
+  MainStackParamList,
+  "PaymentMethods"
+>;
+export type AddOrEditCardProps = NativeStackScreenProps<
+  MainStackParamList,
+  "AddOrEditCard"
+>;
+export type CardScannerProps = NativeStackScreenProps<
+  MainStackParamList,
+  "CardScanner"
+>;
+

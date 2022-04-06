@@ -8,6 +8,12 @@ import { LogInProps } from "src/navigator/MainNavigator";
 import { ScreenHeader } from "@components/ScreenHeader";
 
 const LogIn = ({ navigation }: LogInProps) => {
+
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("saula.akinlol@frontdoorhome.com");
+  const [password, setPassword] = useState("Learntocode1%");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +22,7 @@ const LogIn = ({ navigation }: LogInProps) => {
   const onPressLogIn = () => {
     login(email, password);
   };
+
 
   return (
     <Columns height="fluid" paddingTop={12}>

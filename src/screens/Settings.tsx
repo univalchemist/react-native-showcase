@@ -16,36 +16,45 @@ interface SettingI {
   onPress?: () => void;
 }
 
+
+const SETTINGS: SettingI[] = [
+  {
+    label: "Account",
+    icon: <UserSvg />,
+    navigateTo: "Account",
+  },
+  {
+    label: "Change Password",
+    icon: <PadlockSvg />,
+    navigateTo: "ChangePassword",
+  },
+  {
+    label: "Payment Method",
+    icon: <CardSvg />,
+    navigateTo: "PaymentMethods",
+  },
+  {
+    label: "Notifications",
+    icon: <NotificationsSvg />,
+    navigateTo: "",
+  },
+  {
+    label: "Support",
+    icon: <QuestionSvg />,
+    navigateTo: "",
+  },
+  {
+    label: "Log Out",
+    icon: <LogoutSvg />,
+    navigateTo: "",
+  },
+];
+
 export const Settings = () => {
   const { logout } = useAuth();
 
-  const SETTINGS: SettingI[] = [
-    {
-      label: "Account",
-      icon: <UserSvg />,
-    },
-    {
-      label: "Change Password",
-      icon: <PadlockSvg />,
-    },
-    {
-      label: "Payment Method",
-      icon: <CardSvg />,
-    },
-    {
-      label: "Notifications",
-      icon: <NotificationsSvg />,
-    },
-    {
-      label: "Support",
-      icon: <QuestionSvg />,
-    },
-    {
-      label: "Log Out",
-      icon: <LogoutSvg />,
-      onPress: () => logout(),
-    },
-  ];
+
+
 
   return (
     <Columns height="fluid" paddingTop={12}>

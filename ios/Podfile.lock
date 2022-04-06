@@ -1,5 +1,6 @@
 PODS:
   - boost (1.76.0)
+  - CardScan (2.0.9)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
   - EXApplication (4.0.2):
@@ -367,6 +368,9 @@ PODS:
     - React-Core
   - react-native-camera/RN (4.2.1):
     - React-Core
+  - react-native-cardscan (2.0.0):
+    - CardScan (~> 2.0.9)
+    - React-Core
   - react-native-safe-area-context (3.4.1):
     - React-Core
   - React-perflogger (0.66.4)
@@ -491,6 +495,7 @@ PODS:
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
+  - CardScan
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXApplication (from `../node_modules/expo-application/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -544,6 +549,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-camera (from `../node_modules/react-native-camera`)
+  - react-native-cardscan (from `../node_modules/react-native-cardscan`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -570,6 +576,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - CardScan
     - CocoaAsyncSocket
     - Firebase
     - FirebaseCore
@@ -658,6 +665,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-camera:
     :path: "../node_modules/react-native-camera"
+  react-native-cardscan:
+    :path: "../node_modules/react-native-cardscan"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -707,6 +716,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
+  CardScan: 2f7a3b39a37c0e2c67a9502b3a61a59f007c0710
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   EXApplication: 54fe5bd6268d697771645e8f1aef8b806a65247a
@@ -760,6 +770,7 @@ SPEC CHECKSUMS:
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
   react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
+  react-native-cardscan: 09faaa920f33fdf08d7ef4c750e2c0fff7673419
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
@@ -785,6 +796,6 @@ SPEC CHECKSUMS:
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 1eb819156b7c1aae5191c33bc1cc64d25fbde158
+PODFILE CHECKSUM: ff6debb8e15d91efa40d7bc91f3dffc0bcb7a13a
 
 COCOAPODS: 1.11.3

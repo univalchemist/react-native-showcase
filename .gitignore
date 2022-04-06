@@ -80,3 +80,4 @@ yarn-error.log
 
 release_notes.txt
 .vscode/settings.json
+yarn.lock
