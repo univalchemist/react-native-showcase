@@ -8,9 +8,6 @@ import { LogInProps } from "src/navigator/MainNavigator";
 import { ScreenHeader } from "@components/ScreenHeader";
 
 const LogIn = ({ navigation }: LogInProps) => {
-
-
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
