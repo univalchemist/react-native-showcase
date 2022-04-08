@@ -38,7 +38,7 @@ const CreatePassword = ({ navigation }: CreatePasswordProps) => {
           <Button
             text="Continue"
             onPress={() => {
-              // navigation.navigate("LogIn"); or send('CREATE_AN_ACCOUNT')
+              navigation.navigate("Settings");
             }}
             enableFullWidth
           />

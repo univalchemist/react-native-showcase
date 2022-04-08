@@ -18,10 +18,48 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>NSCameraUsageDescription</key>
-<string>We need access to your camera to scan your card</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Grant access to use camera in the application</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Grant access to use photo library is the application</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Grant access to use photo library is the application</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.ahs.preview.showcase</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>oauthredirect</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.ahs.preview.showcase</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.ahs.preview.showcase</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>oauthredirect</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.ahs.preview.showcase</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -69,8 +107,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Grant access to use camera in the application</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to use FaceID</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

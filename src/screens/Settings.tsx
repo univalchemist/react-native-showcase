@@ -9,6 +9,7 @@ import QuestionSvg from "@assets/icons/question-in-circle.svg";
 import LogoutSvg from "@assets/icons/logout.svg";
 import ChevronRightSvg from "@assets/icons/chevron-right.svg";
 import { useAuth } from "@ftdr/react-native-auth";
+import { useNavigation } from "@react-navigation/native";
 
 interface SettingI {
   label: string;
@@ -16,8 +17,6 @@ interface SettingI {
   navigateTo: string;
   onPress?: () => void;
 }
-
-
 
 const SETTINGS: SettingI[] = [
   {
@@ -52,15 +51,9 @@ const SETTINGS: SettingI[] = [
   },
 ];
 
-
-
-
-
-
-
 export const Settings = () => {
   const { logout } = useAuth();
-
+  const navigation = useNavigation();
   return (
     <Columns height="fluid" paddingTop={12}>
       <Row height="content">
@@ -69,7 +62,9 @@ export const Settings = () => {
             <Typography style={styles.title}>Settings</Typography>
           </Box>
           {SETTINGS.map((setting) => (
-            <TouchableOpacity onPress={setting?.onPress}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(setting.navigateTo)}
+            >
               <Columns alignY="center" paddingX={6} style={styles.settingItem}>
                 <Column width="fluid" paddingY={5}>
                   <Columns alignX="left" alignY="center">

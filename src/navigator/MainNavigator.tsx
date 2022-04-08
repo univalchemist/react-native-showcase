@@ -203,3 +203,7 @@ export type CardScannerProps = NativeStackScreenProps<
   MainStackParamList,
   "CardScanner"
 >;
+export type SettingsProps = NativeStackScreenProps<
+  MainStackParamList,
+  "Settings"
+>;
