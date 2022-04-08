@@ -75,26 +75,17 @@ const MainNavigator = () => {
         <Stack.Screen name="Auth" component={AuthScreen} />
         <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="TakePictureScreen" component={TakePictureScreen} />
-        <Stack.Screen
-          name="ConfirmPictureScreen"
-          component={ConfirmPictureScreen}
-        />
-        <Stack.Screen name="Finish" component={FinishScreen} />
-        <Stack.Screen name="UploadPictures" component={UploadPictures} />
         <Stack.Screen name="Account" component={AccountScreen} />
         <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
         <Stack.Screen name="PaymentMethods" component={PaymentMethodsScreen} />
         <Stack.Screen name="AddOrEditCard" component={AddOrEditCardScreen} />
         <Stack.Screen name="CardScanner" component={CardScannerScreen} />
-
         <Stack.Screen name="Settings" component={SettingsNavigator} />
         <Stack.Screen name="Onboarding" component={OnboardingNavigator} />
 
         {isLoggedIn ? (
           <>
             <Stack.Screen name="Welcome" component={TabNavigator} />
-            <Stack.Screen name="Auth" component={AuthScreen} />
-            <Stack.Screen name="Start" component={StartScreen} />
             <Stack.Screen
               name="TakePictureOrVideoScreen"
               component={TakePictureOrVideoScreen}

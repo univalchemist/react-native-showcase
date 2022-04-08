@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Alert, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Alert, View, Text } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import { AddOrEditCardProps } from "src/navigator/MainNavigator";
-import { Header } from "@components/Header";
+import { ScreenHeader } from "@components/ScreenHeader";
+
 import DeleteIcon from "@assets/icons/deleteIcon.svg";
-import ToggleSwitch from "@components/ToggleSwitch/index";
+import Switch from "@components/Switch";
 import BankCard from "@components/BankCard/";
 
 const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
@@ -22,7 +23,6 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
       {
         text: "Delete",
         onPress: () => console.log("Delete Pressed"),
-        // style: "",
       },
       { text: "Cancel", onPress: () => console.log("cancel") },
     ]);
@@ -31,8 +31,16 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
   return (
     <Columns height="fluid" paddingTop={12}>
       <Rows alignY="between">
-        <Row height="content">
-          <Header
+        <Row height="content" paddingX={5}>
+          <ScreenHeader
+            displayBackArrow
+            MiddleElement={
+              <Text style={styles.headerTitle}>
+                {route?.params?.screen === "addCard"
+                  ? "Add Card"
+                  : "Edit card info"}
+              </Text>
+            }
             RightElement={
               route?.params?.screen !== "addCard" && (
                 <TouchableOpacity onPress={showDeleteDialog}>
@@ -40,13 +48,8 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
                 </TouchableOpacity>
               )
             }
-            title={
-              route?.params?.screen === "addCard"
-                ? "Add Card"
-                : "Edit card info"
-            }
-            displayBackArrow
           />
+
           <Row
             height="content"
             paddingBottom={route?.params?.screen === "addCard" ? 100 : 70}
@@ -62,8 +65,12 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
               cardType="Credit/Debit"
             />
             {route?.params?.screen !== "addCard" && (
-              <View style={{ marginTop: 280 }}>
-                <ToggleSwitch value={toggle} setValue={setToggle} />
+              <View style={styles.switchOuterContainer}>
+                <View style={styles.switchInnnerContainer}>
+                  <Text style={styles.defaultTxt}>Set as default</Text>
+                  <Switch value={toggle} onChange={setToggle} />
+                </View>
+                <View style={styles.separator} />
               </View>
             )}
           </Row>
@@ -78,7 +85,6 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
               onPress={() => {
                 if (route?.params?.screen === "addCard") {
                   navigation.navigate("CardScanner");
-                  return;
                 }
               }}
               enableFullWidth
@@ -91,16 +97,39 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontWeight: "bold",
-    fontSize: 28,
-    lineHeight: 32,
+  headerTitle: {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontSize: 16,
+    color: "#000000",
+    fontWeight: "600",
   },
 
   link: {
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     color: "blue",
+  },
+  switchOuterContainer: {
+    marginTop: 280,
+  },
+  switchInnnerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    height: 40,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
+  defaultTxt: {
+    fontSize: 15,
+    fontWeight: "400",
+    color: "#000",
+  },
+  separator: {
+    height: 0.6,
+    backgroundColor: "#ccc",
   },
 });
 

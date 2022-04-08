@@ -3,4 +3,5 @@ export interface ScreenHeaderProps {
   copy?: string;
   displayBackArrow?: boolean;
   RightElement?: Element;
+  MiddleElement?: Element;
 }

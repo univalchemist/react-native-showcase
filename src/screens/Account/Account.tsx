@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, Dimensions } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import InputField from "@components/InputField";
 import { AccountProps } from "src/navigator/MainNavigator";
 import { ScreenHeader } from "@components/ScreenHeader";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Account = ({ navigation }: AccountProps) => {
   const [firstName, setFirstName] = useState("");
@@ -13,11 +14,11 @@ const Account = ({ navigation }: AccountProps) => {
   const [email, setEmail] = useState("");
 
   return (
-    <Columns height="fluid" paddingTop={12}>
-      <Rows alignY="between">
-        <ScrollView style={{ height: "100%" }}>
-          <Row height="content" style={{ flex: 1, marginBottom: 300 }}>
-            <Stack space={4} paddingX={5} marginBottom={60}>
+    <ScrollView>
+      <Columns height="fluid" paddingTop={12}>
+        <Rows alignY="between">
+          <Row height="content" style={styles.topRow}>
+            <Stack space={4} paddingX={5}>
               <ScreenHeader title="Account" displayBackArrow />
               <Box paddingTop={4}>
                 <InputField
@@ -54,7 +55,13 @@ const Account = ({ navigation }: AccountProps) => {
               </Box>
             </Stack>
 
-            <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
+            <Row
+              height="content"
+              paddingX={5}
+              paddingY={5}
+              paddingBottom={15}
+              paddingTop={SCREEN_HEIGHT * 0.033}
+            >
               <Button
                 disabled={true}
                 text="Save Changes"
@@ -63,28 +70,15 @@ const Account = ({ navigation }: AccountProps) => {
               />
             </Row>
           </Row>
-        </ScrollView>
-      </Rows>
-    </Columns>
+        </Rows>
+      </Columns>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontWeight: "bold",
-    fontSize: 28,
-    lineHeight: 32,
-  },
-  copy: {
-    fontSize: 16,
-    lineHeight: 18,
-    letterSpacing: 0.005,
-    fontWeight: "400",
-  },
-  link: {
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
-    color: "blue",
+  topRow: {
+    marginBottom: 300,
   },
 });
 
