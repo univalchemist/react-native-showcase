@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { StyleSheet, TouchableOpacity, Alert, View, Text } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
@@ -28,6 +28,8 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
     ]);
   };
 
+  const isAddCardScreen = useMemo(() => route?.params?.screen === "addCard", []);
+
   return (
     <Columns height="fluid" paddingTop={12}>
       <Rows alignY="between">
@@ -36,13 +38,13 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
             displayBackArrow
             MiddleElement={
               <Text style={styles.headerTitle}>
-                {route?.params?.screen === "addCard"
+                {isAddCardScreen
                   ? "Add Card"
                   : "Edit card info"}
               </Text>
             }
             RightElement={
-              route?.params?.screen !== "addCard" && (
+              isAddCardScreen && (
                 <TouchableOpacity onPress={showDeleteDialog}>
                   <DeleteIcon />
                 </TouchableOpacity>
@@ -52,7 +54,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
 
           <Row
             height="content"
-            paddingBottom={route?.params?.screen === "addCard" ? 100 : 70}
+            paddingBottom={isAddCardScreen ? 100 : 70}
           >
             <BankCard
               onChangeCardNumber={setCardNumber}
@@ -64,7 +66,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
               disableExpiryDate={false}
               cardType="Credit/Debit"
             />
-            {route?.params?.screen !== "addCard" && (
+            {isAddCardScreen && (
               <View style={styles.switchOuterContainer}>
                 <View style={styles.switchInnnerContainer}>
                   <Text style={styles.defaultTxt}>Set as default</Text>
@@ -78,12 +80,12 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
           <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
             <Button
               text={
-                route?.params?.screen === "addCard"
+                isAddCardScreen
                   ? "Scan Card"
                   : "Save Changes"
               }
               onPress={() => {
-                if (route?.params?.screen === "addCard") {
+                if (isAddCardScreen) {
                   navigation.navigate("CardScanner");
                 }
               }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import InputField from "@components/InputField";
@@ -10,10 +10,7 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const validatePasswords = () => {
-    if (!(!!currentPassword && !!newPassword && !!confirmNewPassword))
-      return true;
-  };
+  const validatePasswords = useMemo(() => !(!!currentPassword && !!newPassword && !!confirmNewPassword), []);
 
   return (
     <Columns height="fluid" paddingTop={12}>
@@ -49,7 +46,7 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
         </Row>
         <Row height="content" paddingX={5} paddingY={5} paddingBottom={90}>
           <Button
-            disabled={validatePasswords()}
+            disabled={validatePasswords}
             text="Continue"
             onPress={() => {}}
             enableFullWidth

@@ -8,5 +8,5 @@ export interface BankCardProps {
   expirtyDateValue: string;
   cardNumberValue: string;
   securityCodeValue: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
