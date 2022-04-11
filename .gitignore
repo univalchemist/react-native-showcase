@@ -81,3 +81,5 @@ yarn-error.log
 release_notes.txt
 .vscode/settings.json
 yarn.lock
+package-lock.json
+yarn.lock

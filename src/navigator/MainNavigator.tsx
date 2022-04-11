@@ -50,7 +50,7 @@ export type MainStackParamList = {
   Account: undefined;
   ChangePassword: undefined;
   PaymentMethods: undefined;
-  AddOrEditCard: undefined;
+  AddOrEditCard: { screen: string };
   CardScanner: undefined;
   Settings: undefined;
   TakePictureScreen: undefined;

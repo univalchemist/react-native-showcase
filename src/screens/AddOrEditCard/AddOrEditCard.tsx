@@ -14,6 +14,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
   const [expiryDate, setExpiryDate] = useState("MM/YY");
   const [securityCode, setSecurityCode] = useState("");
   const [toggle, setToggle] = useState(false);
+  const { screen } = route.params;
 
   const openDate = () => {
     console.log("Open date picter");
@@ -28,7 +29,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
     ]);
   };
 
-  const isAddCardScreen = useMemo(() => route?.params?.screen === "addCard", []);
+  const isAddCardScreen = useMemo(() => screen === "addCard", []);
 
   return (
     <Columns height="fluid" paddingTop={12}>
@@ -38,9 +39,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
             displayBackArrow
             MiddleElement={
               <Text style={styles.headerTitle}>
-                {isAddCardScreen
-                  ? "Add Card"
-                  : "Edit card info"}
+                {isAddCardScreen ? "Add Card" : "Edit card info"}
               </Text>
             }
             RightElement={
@@ -52,10 +51,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
             }
           />
 
-          <Row
-            height="content"
-            paddingBottom={isAddCardScreen ? 100 : 70}
-          >
+          <Row height="content" paddingBottom={isAddCardScreen ? 100 : 70}>
             <BankCard
               onChangeCardNumber={setCardNumber}
               onChangeExpiryDate={openDate}
@@ -79,11 +75,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
 
           <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
             <Button
-              text={
-                isAddCardScreen
-                  ? "Scan Card"
-                  : "Save Changes"
-              }
+              text={isAddCardScreen ? "Scan Card" : "Save Changes"}
               onPress={() => {
                 if (isAddCardScreen) {
                   navigation.navigate("CardScanner");

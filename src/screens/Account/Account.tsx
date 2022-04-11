@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView, Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import InputField from "@components/InputField";
 import { AccountProps } from "src/navigator/MainNavigator";
 import { ScreenHeader } from "@components/ScreenHeader";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Account = ({ navigation }: AccountProps) => {
   const [firstName, setFirstName] = useState("");
@@ -14,7 +15,7 @@ const Account = ({ navigation }: AccountProps) => {
   const [email, setEmail] = useState("");
 
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView>
       <Columns height="fluid" paddingTop={12}>
         <Rows alignY="between">
           <Row height="content" style={styles.topRow}>
@@ -72,7 +73,7 @@ const Account = ({ navigation }: AccountProps) => {
           </Row>
         </Rows>
       </Columns>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
