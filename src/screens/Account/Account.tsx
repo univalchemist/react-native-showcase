@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import InputField from "@components/InputField";
@@ -15,10 +15,10 @@ const Account = ({ navigation }: AccountProps) => {
   const [email, setEmail] = useState("");
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <Columns height="fluid" paddingTop={12}>
         <Rows alignY="between">
-          <Row height="content" style={styles.topRow}>
+          <Row height="content">
             <Stack space={4} paddingX={5}>
               <ScreenHeader title="Account" displayBackArrow />
               <Box paddingTop={4}>
@@ -76,11 +76,5 @@ const Account = ({ navigation }: AccountProps) => {
     </KeyboardAwareScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  topRow: {
-    marginBottom: 300,
-  },
-});
 
 export default Account;
