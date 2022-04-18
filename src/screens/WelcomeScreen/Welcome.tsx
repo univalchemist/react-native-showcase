@@ -1,32 +1,28 @@
-import {
-  AHSMiniLogo,
-  WelcomeIcon1,
-  WelcomeIcon2,
-  WelcomeIcon3,
-} from "@assets/images";
+import { WelcomeIcon1, WelcomeIcon2, WelcomeIcon3 } from "@assets/icons";
+import { AHSMiniLogo } from "@assets/images";
+import { Button, SUPPORTED_BUTTON_COLOR_SCHEMES } from "@components/Button";
 import { Rows, Columns, Stack, Row } from "@mobily/stacks";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 import { WelcomeProps } from "src/navigator/MainNavigator";
 
-import { Button, SUPPORTED_BUTTON_COLOR_SCHEMES } from "@components/Button";
 import { Carousel } from "./components/Carousel";
 
 const CarouselData = [
   {
-    image: WelcomeIcon1,
+    icon: <WelcomeIcon1 />,
     title: "Request Service",
     subtitle:
       "Request service online or by phone. Pay your Trade Service Call Fee.",
   },
   {
-    image: WelcomeIcon2,
+    icon: <WelcomeIcon2 />,
     title: "We Assign a Professional",
     subtitle:
       "Request service online or by phone. Pay your Trade Service Call Fee.",
   },
   {
-    image: WelcomeIcon3,
+    icon: <WelcomeIcon3 />,
     title: "We Repair",
     subtitle:
       "Request service online or by phone. Pay your Trade Service Call Fee.",

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Alert, View } from "react-native";
+import React, { useMemo, useState } from "react";
+import { StyleSheet, TouchableOpacity, Alert, View, Text } from "react-native";
 import { Columns, Rows, Row, Box, Stack } from "@mobily/stacks";
 import { Button } from "@components/Button";
 import { AddOrEditCardProps } from "src/navigator/MainNavigator";
-import { Header } from "@components/Header";
+import { ScreenHeader } from "@components/ScreenHeader";
+
 import DeleteIcon from "@assets/icons/deleteIcon.svg";
-import ToggleSwitch from "@components/ToggleSwitch/index";
+import Switch from "@components/Switch";
 import BankCard from "@components/BankCard/";
 
 const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
@@ -13,6 +14,7 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
   const [expiryDate, setExpiryDate] = useState("MM/YY");
   const [securityCode, setSecurityCode] = useState("");
   const [toggle, setToggle] = useState(false);
+  const { screen } = route.params;
 
   const openDate = () => {
     console.log("Open date picter");
@@ -22,35 +24,34 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
       {
         text: "Delete",
         onPress: () => console.log("Delete Pressed"),
-        // style: "",
       },
       { text: "Cancel", onPress: () => console.log("cancel") },
     ]);
   };
 
+  const isAddCardScreen = useMemo(() => screen === "addCard", []);
+
   return (
     <Columns height="fluid" paddingTop={12}>
       <Rows alignY="between">
-        <Row height="content">
-          <Header
+        <Row height="content" paddingX={5}>
+          <ScreenHeader
+            displayBackArrow
+            MiddleElement={
+              <Text style={styles.headerTitle}>
+                {isAddCardScreen ? "Add Card" : "Edit card info"}
+              </Text>
+            }
             RightElement={
-              route?.params?.screen !== "addCard" && (
+              isAddCardScreen && (
                 <TouchableOpacity onPress={showDeleteDialog}>
                   <DeleteIcon />
                 </TouchableOpacity>
               )
             }
-            title={
-              route?.params?.screen === "addCard"
-                ? "Add Card"
-                : "Edit card info"
-            }
-            displayBackArrow
           />
-          <Row
-            height="content"
-            paddingBottom={route?.params?.screen === "addCard" ? 100 : 70}
-          >
+
+          <Row height="content" paddingBottom={isAddCardScreen ? 100 : 70}>
             <BankCard
               onChangeCardNumber={setCardNumber}
               onChangeExpiryDate={openDate}
@@ -61,24 +62,23 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
               disableExpiryDate={false}
               cardType="Credit/Debit"
             />
-            {route?.params?.screen !== "addCard" && (
-              <View style={{ marginTop: 280 }}>
-                <ToggleSwitch value={toggle} setValue={setToggle} />
+            {isAddCardScreen && (
+              <View style={styles.switchOuterContainer}>
+                <View style={styles.switchInnnerContainer}>
+                  <Text style={styles.defaultTxt}>Set as default</Text>
+                  <Switch value={toggle} onChange={setToggle} />
+                </View>
+                <View style={styles.separator} />
               </View>
             )}
           </Row>
 
           <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
             <Button
-              text={
-                route?.params?.screen === "addCard"
-                  ? "Scan Card"
-                  : "Save Changes"
-              }
+              text={isAddCardScreen ? "Scan Card" : "Save Changes"}
               onPress={() => {
-                if (route?.params?.screen === "addCard") {
+                if (isAddCardScreen) {
                   navigation.navigate("CardScanner");
-                  return;
                 }
               }}
               enableFullWidth
@@ -91,16 +91,39 @@ const AddOrEditCard = ({ navigation, route }: AddOrEditCardProps) => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontWeight: "bold",
-    fontSize: 28,
-    lineHeight: 32,
+  headerTitle: {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontSize: 16,
+    color: "#000000",
+    fontWeight: "600",
   },
 
   link: {
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     color: "blue",
+  },
+  switchOuterContainer: {
+    marginTop: 280,
+  },
+  switchInnnerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    height: 40,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
+  defaultTxt: {
+    fontSize: 15,
+    fontWeight: "400",
+    color: "#000",
+  },
+  separator: {
+    height: 0.6,
+    backgroundColor: "#ccc",
   },
 });
 

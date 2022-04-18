@@ -1,18 +1,7 @@
-import React, { useState, useRef } from "react";
-import {
-  View,
-  Animated,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { View, TextInput, TouchableOpacity, Text } from "react-native";
 import styled from "styled-components/native";
 
-import IncorrectFieldIcon from "../../assets/images/check_invalid_circle.svg";
-import CorrectFieldIcon from "../../assets/images/check_valid_circle.svg";
-import EyeOffIcon from "../../assets/images/eye_off.svg";
-import EyeOnnIcon from "../../assets/images/eye_on.svg";
 import { BankCardProps } from "./types";
 
 const Container = styled(View)`
@@ -79,39 +68,17 @@ const ExpirationText = styled(Text)`
   height: 16px;
   left: 16px;
   top: 144px;
-
-  /* Label */
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 11px;
   line-height: 12px;
-  /* or 109% */
-
   display: flex;
   align-items: center;
-
   text-transform: uppercase;
-
-  /* Basic/Black */
-
   color: #000000;
 `;
-const ExpirationInput = styled(TextInput)`
-  position: absolute;
-  width: 148px;
-  height: 40px;
-  left: 16px;
-  top: 164px;
 
-  /* Basic/White */
-
-  background: #ffffff;
-  border-radius: 5px;
-  padding-horizontal: 8px;
-  padding-vertical: 12px;
-`;
 const ExpiryButton = styled(TouchableOpacity)`
   position: absolute;
   width: 148px;
@@ -129,23 +96,14 @@ const SecurityCodeText = styled(Text)`
   height: 16px;
   left: 171px;
   top: 144px;
-
-  /* Label */
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 11px;
   line-height: 12px;
-  /* or 109% */
-
   display: flex;
   align-items: center;
-
   text-transform: uppercase;
-
-  /* Basic/Black */
-
   color: #000000;
 `;
 const SecurityCodeInput = styled(TextInput)`
@@ -154,9 +112,6 @@ const SecurityCodeInput = styled(TextInput)`
   height: 40px;
   right: 16px;
   top: 164px;
-
-  /* Basic/White */
-
   background: #ffffff;
   border-radius: 5px;
   padding-horizontal: 8px;
@@ -182,12 +137,10 @@ const BankCard: React.FC<BankCardProps> = ({
   securityCodeValue,
   disableExpiryDate,
 }) => {
-  const [isFieldActive, setIsFieldActive] = useState(false);
-
   return (
     <Container>
       <CardTypeText>{cardType}</CardTypeText>
-      <CardNumberText>{"Card Number"}</CardNumberText>
+      <CardNumberText>Card Number</CardNumberText>
       <CardInput
         placeholder="0000 0000 0000 0000"
         maxLength={16}
@@ -197,7 +150,7 @@ const BankCard: React.FC<BankCardProps> = ({
         {...otherTextInputProps}
       />
 
-      <ExpirationText>{"EXPIRATION DATE"}</ExpirationText>
+      <ExpirationText>EXPIRATION DATE</ExpirationText>
       <ExpiryButton disabled={disableExpiryDate} onPress={onChangeExpiryDate}>
         <ExpirationInnerText
           style={{ color: expirtyDateValue === "MM/YY" ? "#AEAEB2" : "#000" }}
@@ -217,14 +170,5 @@ const BankCard: React.FC<BankCardProps> = ({
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  cardInput: {
-    height: 24,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-    alignSelf: "center",
-  },
-});
 
 export default BankCard;

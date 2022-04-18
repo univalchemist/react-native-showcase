@@ -65,13 +65,7 @@ const LogIn = ({ navigation }: LogInProps) => {
           </Stack>
         </Row>
         <Row height="content" paddingX={5} paddingY={5} paddingBottom={15}>
-          <Button
-            text="Continue"
-            onPress={() => {
-              navigation.navigate("CreatePassword"); // send('SIGN_UP')
-            }}
-            enableFullWidth
-          />
+          <Button text="Continue" onPress={onPressLogIn} enableFullWidth />
         </Row>
       </Rows>
     </Columns>

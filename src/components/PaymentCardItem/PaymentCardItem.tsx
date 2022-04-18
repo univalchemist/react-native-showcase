@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 import ArrowRight from "../../assets/images/arrowRight.svg";
@@ -19,7 +19,7 @@ const PaymentCardItem: React.FC<PaymentCardItemProps> = ({
           <Text style={styles.cardtype}>{cardType}</Text>
           <Text>
             Ending in : {cardNumber}
-            {expiryDate && ` . Expires: ${expiryDate}`}
+            {expiryDate && ` · Expires: ${expiryDate}`}
           </Text>
         </View>
         <ArrowRight />

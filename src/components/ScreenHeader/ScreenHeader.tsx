@@ -9,6 +9,7 @@ export const ScreenHeader = ({
   copy,
   displayBackArrow = false,
   RightElement,
+  MiddleElement,
 }: ScreenHeaderProps) => {
   const navigation = useNavigation();
   return (
@@ -30,6 +31,7 @@ export const ScreenHeader = ({
               />
             )}
           </Column>
+          <Column>{MiddleElement}</Column>
           <Column width="content" style={styles.rightColumn} paddingRight={4}>
             {RightElement}
           </Column>
@@ -59,6 +61,10 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0.005,
   },
+  middleColumn: {
+    alignItems: "flex-start",
+  },
+
   rightColumn: {
     alignItems: "flex-end",
   },

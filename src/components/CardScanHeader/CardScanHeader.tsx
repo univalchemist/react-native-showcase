@@ -1,12 +1,11 @@
 import { StyleSheet, Text } from "react-native";
-import { Columns, Box, Bleed, Column } from "@mobily/stacks";
+import { Columns, Bleed, Column } from "@mobily/stacks";
 import { ArrowLeft } from "@assets/images";
 import { useNavigation } from "@react-navigation/native";
 import { CSHeaderProps } from "./types";
 
 export const CSHeader = ({
   title,
-  copy,
   displayBackArrow = false,
   RightElement,
 }: CSHeaderProps) => {
@@ -47,12 +46,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     lineHeight: 32,
-    // letterSpacing: -0.01,
   },
   copy: {
     fontSize: 14,
     lineHeight: 16,
-    // letterSpacing: 0.005,
   },
   rightColumn: {
     alignItems: "flex-end",
